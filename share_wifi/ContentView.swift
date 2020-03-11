@@ -9,12 +9,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var alertIsVisible: Bool = false
+    
     var body: some View {
         VStack {
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-            Text("Share Wifi")
-                .font(.title)
-                .foregroundColor(Color(red: 1.0, green: 0.0, blue: 1.0, opacity: 1.0))
+            Button(action: {
+                print("QR code generated")
+                self.alertIsVisible = true
+            }) {
+                Text("Share Wifi")
+                    .font(.title)
+                    .fontWeight(.regular)
+                    .foregroundColor(Color(red: 1.0, green: 0.0, blue: 1.0, opacity: 1.0))
+                    .lineLimit(nil)
+            }
+            .alert(isPresented: $alertIsVisible) { () ->
+                Alert in
+                return Alert(title: Text("QR code"), message: Text("QR code pops up"), dismissButton: .default(Text("Done")))
+                
             }
         }
     }
